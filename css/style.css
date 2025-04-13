@@ -42,7 +42,6 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: var(--color-bg);
 }
 
 /* Style des liens */
