@@ -139,7 +139,7 @@ nav a.accent-link {
 .hero {
   position: relative;
   height: 100vh;
-  width: 100%; /* Prend toute la largeur de la fenêtre */
+  width: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -149,35 +149,25 @@ nav a.accent-link {
 
 .hero-bg {
   position: absolute;
-  top: 0;
+  top: -30px;
   left: 0;
   width: 100%;
   height: 100%;
   border: none;
   z-index: 0;
   overflow: hidden;
-}
-
-.hero-iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+  scroll-behavior: unset;
 }
 
 .hero-content {
   position: relative;
+  top: -30px;
   z-index: 1;
   text-align: center;
   padding: 2em;
   font-size: 2rem;
   font-weight: bold;
   cursor: default;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
