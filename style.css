@@ -155,8 +155,8 @@ nav a.accent-link {
   height: 100%;
   border: none;
   z-index: 0;
-  overflow: hidden;
-  scroll-behavior: unset;
+  overflow:hidden;
+  pointer-events: none;
 }
 
 .hero-content {
