@@ -144,30 +144,5 @@ nav a.accent-link {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(0, 17, 255);
-}
-
-.hero-bg {
-  position: absolute;
-  top: -30px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  z-index: 0;
-  overflow:hidden;
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  top: -30px;
-  z-index: 1;
-  text-align: center;
-  padding: 2em;
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: default;
-  pointer-events: none;
 }
 
