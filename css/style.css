@@ -2,8 +2,7 @@
 
 :root {
   --primary-color: #000000;
-  --hover-color: #d62323;
-  --accent-color: #d62323;
+  --hover-color: rgba(197, 61, 61, 0.3);
   --text-color: #ffffff;
 }
 
@@ -34,8 +33,12 @@ main p {
 }
 
 nav {
-  background-color: var(--primary-color);
-  border-bottom: 1px solid var(--hover-color);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  z-index: 999;
+  position: fixed;
+  width: 100%;
 }
 
 nav ul {
@@ -64,7 +67,7 @@ nav a:hover {
 }
 
 nav a.accent-link {
-  background-color: var(--accent-color);
+  background-color: rgba(255, 0, 0, 0.3);
 }
 
 #open-sidebar-button {
@@ -138,11 +141,41 @@ nav a.accent-link {
 
 .hero {
   position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+  min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
+.hero canvas{
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* En dessous du contenu */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%); /* Centre verticalement et horizontalement */
+  color: white;
+  text-align: center;
+  z-index: 2;
+  max-width: 100vw; /* Responsive sur les petits écrans */
+  font-size: larger;
+  cursor: default;
+}
+
+.hero-content h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 8em;
+}
+
+.hero-content p {
+  font-family: 'anton', sans-serif;
+  font-size: 1.5em;
+  margin-top: -5em;
+}
