@@ -1,8 +1,4 @@
-:root {
-  --primary-color: #000000;
-  --hover-color: rgba(197, 61, 61, 0.3);
-  --text-color: #ffffff;
-}
+/* #region ==================BASE=================*/
 
 * {
   margin: 0;
@@ -11,24 +7,142 @@
 }
 
 html {
-  font-family: Poppins, 'Segoe UI', sans-serif;
-  color: var(--text-color);
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  background-color: var(--primary-color);
+  background-color: black;
+}
+/* #endregion ==================BASE=================*/
+
+/* #region ==================NAVBAR=================*/
+
+/* Style du nav */
+nav {
+  height: 40px;
+  width: clamp(280px, 50%, 800px);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px auto 0 auto;
+  border-radius: 20px;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 0 10px;
 }
 
-main {
-  padding: min(5em, 7%);
+/* Container des liens */
+.links-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: var(--color-bg);
 }
 
-main p {
-  margin-top: .35em;
+/* Style des liens */
+nav a {
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
 }
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+nav .logo {
+  margin-right: auto;
+  margin-left: -10px;
+}
+
+/* Burger button */
+.burger {
+  display: none; /* Masquer par défaut */
+  align-items: center;
+  font-size: 1.75rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.burger div {
+  width: 30px;
+  height: 4px;
+  background-color: white;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+/* Menu fullscreen */
+.fullscreen-menu {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+  z-index: 1000;
+}
+
+.fullscreen-menu a {
+  color: white;
+  font-size: 2rem;
+  margin: 20px;
+  text-decoration: none;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.fullscreen-menu.show {
+  top: 0;
+}
+
+/* Responsive - Apparition du burger en dessous de 1250px */
+@media (max-width: 1300px) {
+  .links-container {
+    display: none; /* Masquer les liens sur petit écran */
+  }
+
+  .burger {
+    display: block; /* Afficher le burger */
+  }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+
+
+/* #endregion ==================NAVBAR=================*/
+
+/* #region ==================HERO=================*/
 
 .demo-1 {
 	--color-text: #fff;
@@ -41,7 +155,6 @@ main p {
 	--color-subtitle-bg: #ac1122;
 }
 
-
 .hero {
   position: relative;
   min-height: 100vh;
@@ -52,8 +165,6 @@ main p {
 
 .hero canvas{
   position: absolute;
-  top: 1.5em;
-  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -63,7 +174,7 @@ main p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -65%);
+  transform: translate(-50%, -50%);
   color: white;
   text-align: center;
   z-index: 2;
@@ -74,5 +185,19 @@ main p {
 
 .hero-content h1 {
   font-family: 'Anton', sans-serif;
-  font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
+  font-size: 8rem;
 }
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero-content h1 {
+    font-size: 5rem;
+  }
+}
+
+/* #endregion ==================HERO=================*/
