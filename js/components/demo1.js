@@ -1,11 +1,13 @@
+var header = document.querySelector('.site-header');
 var canvas = document.querySelector('canvas');
 var width = canvas.offsetWidth,
     height = canvas.offsetHeight;
 
 var colors = [
-    new THREE.Color(0xac1122),
-    new THREE.Color(0x96789f),
-    new THREE.Color(0x535353)];
+    new THREE.Color(0xf8f9fa),
+    new THREE.Color(0xdbe4ee),
+    new THREE.Color(0xced4da)
+];
 
 var renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -13,7 +15,7 @@ var renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 renderer.setSize(width, height);
-renderer.setClearColor(0x000000);
+renderer.setClearColor(0xFFFFFF); // même fond que le body
 
 var scene = new THREE.Scene();
 
@@ -31,7 +33,7 @@ scene.add(galaxy);
 var loader = new THREE.TextureLoader();
 loader.crossOrigin = "";
 var dotTexture = loader.load("img/dotTexture.png");
-var dotsAmount = 3000;
+var dotsAmount = 4000;
 var dotsGeometry = new THREE.Geometry();
 var positions = new Float32Array(dotsAmount * 3);
 
@@ -51,7 +53,7 @@ for (var i = 0; i < dotsAmount; i++) {
     vector.x = Math.cos(vector.theta) * Math.cos(vector.phi);
     vector.y = Math.sin(vector.phi);
     vector.z = Math.sin(vector.theta) * Math.cos(vector.phi);
-    vector.multiplyScalar(120 + (Math.random() - 0.5) * 5);
+    vector.multiplyScalar(240 + (Math.random() - 0.5) * 10);
     vector.scaleX = 5;
 
     if (Math.random() > 0.5) {
@@ -60,7 +62,7 @@ for (var i = 0; i < dotsAmount; i++) {
     dotsGeometry.vertices.push(vector);
     vector.toArray(positions, i * 3);
     colors[vector.color].toArray(colorsAttribute, i*3);
-    sizes[i] = 5;
+    sizes[i] = 2;
 }
 
 function moveDot(vector, index) {
@@ -97,7 +99,8 @@ var shaderMaterial = new THREE.ShaderMaterial({
     },
     vertexShader: document.getElementById("wrapVertexShader").textContent,
     fragmentShader: document.getElementById("wrapFragmentShader").textContent,
-    transparent:true
+    transparent:true,
+     opacity: 0.05
 });
 var wrap = new THREE.Points(bufferWrapGeom, shaderMaterial);
 scene.add(wrap);
@@ -105,15 +108,15 @@ scene.add(wrap);
 // Create white segments
 var segmentsGeom = new THREE.Geometry();
 var segmentsMat = new THREE.LineBasicMaterial({
-    color: 0xffffff,
+    color: 0xdbe2ea,      // blanc cassé
     transparent: true,
-    opacity: 0.3,
+    opacity: 0.05,       // plus subtil
     vertexColors: THREE.VertexColors
 });
 for (i = dotsGeometry.vertices.length - 1; i >= 0; i--) {
     vector = dotsGeometry.vertices[i];
     for (var j = dotsGeometry.vertices.length - 1; j >= 0; j--) {
-        if (i !== j && vector.distanceTo(dotsGeometry.vertices[j]) < 12) {
+        if (i !== j && vector.distanceTo(dotsGeometry.vertices[j]) < 20) {
             segmentsGeom.vertices.push(vector);
             segmentsGeom.vertices.push(dotsGeometry.vertices[j]);
             segmentsGeom.colors.push(colors[vector.color]);
@@ -157,7 +160,7 @@ function render(a) {
 function onDotHover(index) {
     dotsGeometry.vertices[index].tl = new TimelineMax();
     dotsGeometry.vertices[index].tl.to(dotsGeometry.vertices[index], 1, {
-        scaleX: 10,
+        scaleX: 4,
         ease: Elastic.easeOut.config(2, 0.2),
         onUpdate: function() {
             attributeSizes.array[index] = dotsGeometry.vertices[index].scaleX;
@@ -167,7 +170,7 @@ function onDotHover(index) {
 
 function mouseOut(index) {
     dotsGeometry.vertices[index].tl.to(dotsGeometry.vertices[index], 0.4, {
-        scaleX: 5,
+        scaleX: 2,
         ease: Power2.easeOut,
         onUpdate: function() {
             attributeSizes.array[index] = dotsGeometry.vertices[index].scaleX;

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets — Nathan Senechal</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="js/projects-filter.js" defer></script>
+
+  <script>
+    document.documentElement.className = "js";
+    var supportsCssVars = function () {
+      var e, t = document.createElement("style");
+      t.innerHTML = "root: { --tmp-var: bold; }";
+      document.head.appendChild(t);
+      e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)"));
+      t.parentNode.removeChild(t);
+      return e;
+    };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+  </script>
+
+  <!-- Shaders (background) -->
+  <script type="x-shader/x-vertex" id="wrapVertexShader">
+    attribute float size;
+    attribute vec3 color;
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      gl_PointSize = size * ( 350.0 / - mvPosition.z );
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="wrapFragmentShader">
+    varying vec3 vColor;
+    uniform sampler2D texture;
+    void main(){
+      vec4 textureColor = texture2D( texture, gl_PointCoord );
+      if ( textureColor.a < 0.3 ) discard;
+      vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
+      gl_FragColor = color;
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div id="bg-slot"></div>
+  <script src="js/include/include-background.js"></script>
+
+  <!-- Navbar -->
+  <div id="navbar-slot"></div>
+  <script src="js/include/include-navbar.js" defer></script>
+
+  <main class="projects-hub">
+
+    <!-- HERO -->
+    <header class="projects-hub__hero">
+      <div class="projects-hub__container">
+        <div class="projects-hub__tag">PROJETS · CAS D’USAGE · RÉALISATIONS</div>
+
+        <h1 class="projects-hub__title">
+          Un aperçu de mes projets en Business Intelligence & automatisation.
+        </h1>
+
+        <p class="projects-hub__desc">
+          Chaque projet met l’accent sur la robustesse, la clarté des indicateurs et l’impact opérationnel.
+          Explorez les cas d’usage par thématique, ou ouvrez un projet pour voir le contexte, la solution et les résultats.
+        </p>
+
+        <!-- filtres (UI, on branchera plus tard en JS si tu veux) -->
+        <div class="projects-hub__filters" role="group" aria-label="Filtrer les projets">
+          <button class="chip is-active" type="button" data-filter="all">Tous</button>
+          <button class="chip" type="button" data-filter="bi">BI & Reporting</button>
+          <button class="chip" type="button" data-filter="automation">Automatisation</button>
+          <button class="chip" type="button" data-filter="power">Power Platform</button>
+          <button class="chip" type="button" data-filter="data">Data Modeling</button>
+          <button class="chip" type="button" data-filter="web">Web</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- GRID -->
+    <section class="projects-hub__grid" aria-label="Liste des projets">
+      <div class="projects-hub__container">
+
+        <div class="cards-grid">
+
+          <!-- 1 -->
+          <article class="project-card" data-cat="bi">
+            <a class="project-card__link" href="rapport-act.html" aria-label="Ouvrir : Rapport d'activité automatique">
+              <div class="project-card__media">
+                <img src="img/projects/rapport-act/minia.png" alt="Rapport d'activité automatique">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">BI & Reporting</span>
+                  <span class="badge badge--ghost">VBA / Power Query</span>
+                </div>
+
+                <h2 class="project-card__title">Rapport d'activité automatique</h2>
+
+                <p class="project-card__desc">
+                  Extraction, calcul de métriques, indicateurs clés et restitution via tableaux de bord interactifs.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">Gain de temps · Fiabilisation</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- 2 -->
+          <article class="project-card" data-cat="automation">
+            <a class="project-card__link" href="dtaf.html" aria-label="Ouvrir : Dossier de projets automatisés">
+              <div class="project-card__media">
+                <img src="img/projects/dtaf/minia.png" alt="Dossier de projets automatisés">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">Automatisation</span>
+                  <span class="badge badge--ghost">VBA / API</span>
+                </div>
+
+                <h2 class="project-card__title">Dossier de projets automatisés</h2>
+
+                <p class="project-card__desc">
+                  Génération de documents, contrôles, consolidation et réduction des erreurs sur un process critique.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">Workflow · Contrôles</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- 3 -->
+          <article class="project-card" data-cat="bi">
+            <a class="project-card__link" href="belha.html" aria-label="Ouvrir : Gestion énergétique multi-site">
+              <div class="project-card__media">
+                <img src="img/projects/belha/minia.png" alt="Gestion énergétique multi-site">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">Pilotage énergétique</span>
+                  <span class="badge badge--ghost">Excel / BI</span>
+                </div>
+
+                <h2 class="project-card__title">Gestion énergétique multi-site</h2>
+
+                <p class="project-card__desc">
+                  Suivi des consommations, indicateurs, alertes et consolidation multi-sites pour le pilotage.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">KPI · Alertes</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- 4 -->
+          <article class="project-card" data-cat="power">
+            <a class="project-card__link" href="docs.html" aria-label="Ouvrir : Portail documentaire sécurisé">
+              <div class="project-card__media">
+                <img src="img/projects/docs/minia.png" alt="Portail documentaire sécurisé">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">Gestion documentaire</span>
+                  <span class="badge badge--ghost">Power Platform</span>
+                </div>
+
+                <h2 class="project-card__title">Portail documentaire sécurisé</h2>
+
+                <p class="project-card__desc">
+                  Dépôt/validation, suivi des versions et centralisation des documents avec workflow.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">Gouvernance · Traçabilité</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- 5 -->
+          <article class="project-card" data-cat="data">
+            <a class="project-card__link" href="bdd.html" aria-label="Ouvrir : Création de bases de données">
+              <div class="project-card__media">
+                <img src="img/projects/bdd/minia.png" alt="Création de bases de données">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">Data Modeling</span>
+                  <span class="badge badge--ghost">SQL</span>
+                </div>
+
+                <h2 class="project-card__title">Création de bases de données</h2>
+
+                <p class="project-card__desc">
+                  Modélisation, normalisation, optimisation des requêtes et structuration des données.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">Modèle · Performance</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- 6 -->
+          <article class="project-card" data-cat="web">
+            <a class="project-card__link" href="site.html" aria-label="Ouvrir : Développement de site web">
+              <div class="project-card__media">
+                <img src="img/projects/site/minia.png" alt="Développement de site web" class="img-contain">
+              </div>
+
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="badge">Développement Web</span>
+                  <span class="badge badge--ghost">HTML / CSS / JS</span>
+                </div>
+
+                <h2 class="project-card__title">Développement de site web</h2>
+
+                <p class="project-card__desc">
+                  Création de sites web responsives et accessibles. Design, développement front-end et optimisation des performances.
+                </p>
+
+                <div class="project-card__foot">
+                  <span class="project-card__kpi">Modèle · Performance</span>
+                  <span class="project-card__cta">Découvrir →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

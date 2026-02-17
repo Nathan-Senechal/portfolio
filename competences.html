@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compétences — Nathan Senechal</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Shaders (background) -->
+  <script type="x-shader/x-vertex" id="wrapVertexShader">
+    attribute float size;
+    attribute vec3 color;
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      gl_PointSize = size * ( 350.0 / - mvPosition.z );
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="wrapFragmentShader">
+    varying vec3 vColor;
+    uniform sampler2D texture;
+    void main(){
+      vec4 textureColor = texture2D( texture, gl_PointCoord );
+      if ( textureColor.a < 0.3 ) discard;
+      vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
+      gl_FragColor = color;
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div id="bg-slot"></div>
+  <script src="js/include/include-background.js"></script>
+
+  <!-- Navbar -->
+  <div id="navbar-slot"></div>
+  <script src="js/include/include-navbar.js" defer></script>
+
+  <main class="skills">
+
+    <!-- HERO -->
+    <header class="skills-hero">
+      <div class="skills__container">
+        <div class="skills-hero__tag">COMPÉTENCES · STACK · MÉTHODE</div>
+
+          <div class="skills-hero__content">
+            <h1 class="skills-hero__title">
+              Mes compétences
+            </h1>
+
+            <p class="skills-hero__desc">
+              Je travaille sur toute la chaîne de valeur data : collecte, transformation, structuration, automatisation
+              et restitution via des indicateurs lisibles. Mon objectif : des systèmes fiables, maintenables et orientés impact.
+            </p>
+          </div>
+      </div>
+    </header>
+
+    <!-- MARQUEE STACK -->
+    <section class="skills-marquee" aria-label="Stack (logos)">
+      <div class="skills__container">
+        <div class="skills-sectionHead">
+          <h2 class="skills-sectionTitle">Stack</h2>
+          <p class="skills-sectionDesc">
+            Outils utilisés au quotidien (BI, automatisation, data, web).
+          </p>
+        </div>
+      </div>
+
+      <div class="marquee" role="presentation">
+        <div class="marquee__track">
+          <!-- Tu peux remplacer par des logos SVG/PNG -->
+          <div class="logo-pill">Power BI</div>
+          <div class="logo-pill">Power Query</div>
+          <div class="logo-pill">Excel</div>
+          <div class="logo-pill">VBA</div>
+          <div class="logo-pill">SQL</div>
+          <div class="logo-pill">Python</div>
+          <div class="logo-pill">Power Automate</div>
+          <div class="logo-pill">SharePoint</div>
+          <div class="logo-pill">Git</div>
+          <div class="logo-pill">HTML</div>
+          <div class="logo-pill">CSS</div>
+          <div class="logo-pill">JavaScript</div>
+
+          <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+                    <!-- duplicate pour boucle fluide -->
+          <div class="logo-pill" aria-hidden="true">Power BI</div>
+          <div class="logo-pill" aria-hidden="true">Power Query</div>
+          <div class="logo-pill" aria-hidden="true">Excel</div>
+          <div class="logo-pill" aria-hidden="true">VBA</div>
+          <div class="logo-pill" aria-hidden="true">SQL</div>
+          <div class="logo-pill" aria-hidden="true">Python</div>
+          <div class="logo-pill" aria-hidden="true">Power Automate</div>
+          <div class="logo-pill" aria-hidden="true">SharePoint</div>
+          <div class="logo-pill" aria-hidden="true">Git</div>
+          <div class="logo-pill" aria-hidden="true">HTML</div>
+          <div class="logo-pill" aria-hidden="true">CSS</div>
+          <div class="logo-pill" aria-hidden="true">JavaScript</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILIERS -->
+    <section class="skills-section" aria-label="Piliers">
+      <div class="skills__container">
+        <div class="skills-sectionHead">
+          <h2 class="skills-sectionTitle">Piliers</h2>
+          <p class="skills-sectionDesc">
+            Mes compétences sont structurées en quatre blocs : BI, automatisation, data, et développement.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+
+          <article class="skill-card">
+            <div class="skill-card__top">
+              <div class="skill-card__title">BI & Reporting</div>
+              <div class="skill-card__badge">Décisionnel</div>
+            </div>
+            <p class="skill-card__desc">
+              Création d’indicateurs, tableaux de bord et modèles de reporting orientés pilotage.
+            </p>
+            <div class="skill-card__tags">
+              <span class="tag">Power BI</span>
+              <span class="tag">DAX</span>
+              <span class="tag">Modélisation</span>
+              <span class="tag">Dataviz</span>
+            </div>
+            <div class="skill-card__bullets">
+              <div>• KPI, segments, drilldown, story-telling</div>
+              <div>• Modèle en étoile, mesures, cohérence</div>
+              <div>• Restitution lisible pour métiers / direction</div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-card__top">
+              <div class="skill-card__title">Automatisation</div>
+              <div class="skill-card__badge">Workflow</div>
+            </div>
+            <p class="skill-card__desc">
+              Réduction des tâches répétitives via scripts, orchestrations et intégrations.
+            </p>
+            <div class="skill-card__tags">
+              <span class="tag">VBA</span>
+              <span class="tag">Power Automate</span>
+              <span class="tag">API</span>
+              <span class="tag">SharePoint</span>
+            </div>
+            <div class="skill-card__bullets">
+              <div>• Génération de documents / exports automatisés</div>
+              <div>• Contrôles qualité et sécurisation des flux</div>
+              <div>• Automatisation orientée usage (adoption)</div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-card__top">
+              <div class="skill-card__title">Data Engineering</div>
+              <div class="skill-card__badge">Pipeline</div>
+            </div>
+            <p class="skill-card__desc">
+              Collecte, transformation et structuration de données pour des bases fiables.
+            </p>
+            <div class="skill-card__tags">
+              <span class="tag">SQL</span>
+              <span class="tag">Python</span>
+              <span class="tag">Qualité</span>
+              <span class="tag">Gouvernance</span>
+            </div>
+            <div class="skill-card__bullets">
+              <div>• Nettoyage, normalisation, règles métiers</div>
+              <div>• Modélisation, performance, indexation</div>
+              <div>• Traçabilité, documentation, standards</div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-card__top">
+              <div class="skill-card__title">Développement</div>
+              <div class="skill-card__badge">Web</div>
+            </div>
+            <p class="skill-card__desc">
+              Interfaces utiles et propres pour présenter, piloter ou industrialiser un outil.
+            </p>
+            <div class="skill-card__tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">UX</span>
+            </div>
+            <div class="skill-card__bullets">
+              <div>• UI claire, responsive, accessible</div>
+              <div>• Composants réutilisables, cohérence visuelle</div>
+              <div>• Intégration avec données / automatisations</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MÉTHODE & SOFT SKILLS -->
+    <section class="skills-section" aria-label="Méthode">
+      <div class="skills__container">
+        <div class="skills-sectionHead">
+          <h2 class="skills-sectionTitle">Méthode & soft skills appliqués</h2>
+          <p class="skills-sectionDesc">
+            Des compétences “terrain” : comprendre, cadrer, livrer proprement, et faire adopter.
+          </p>
+        </div>
+
+        <div class="method-grid">
+          <div class="method-card">
+            <div class="method-card__title">Cadrage & compréhension métier</div>
+            <p class="method-card__desc">
+              Reformuler le besoin, clarifier les priorités, définir les KPI et critères de succès.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-card__title">Structuration & standards</div>
+            <p class="method-card__desc">
+              Nommer, documenter, versionner. Construire pour être maintenu, pas juste “faire marcher”.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-card__title">Fiabilisation & contrôle</div>
+            <p class="method-card__desc">
+              Contrôles qualité, tests, traçabilité : éviter les chiffres incohérents et les effets “boîte noire”.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-card__title">Communication & adoption</div>
+            <p class="method-card__desc">
+              Restitution claire, formation rapide, simplification des parcours utilisateurs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="skills-cta" aria-label="Contact">
+      <div class="skills__container">
+        <div class="skills-cta__box">
+          <div>
+            <h2 class="skills-cta__title">Construisons un outil utile et robuste.</h2>
+            <p class="skills-cta__desc">
+              Reporting, automatisation, structuration data : je peux vous aider à gagner en fiabilité et en efficacité.
+            </p>
+          </div>
+          <a class="btn-primary" href="contact.html">Me contacter</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

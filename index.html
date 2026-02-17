@@ -1,70 +1,241 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio Nathan Senechal</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="css/style.css" />
   <script src="js/script.js" defer></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    document.documentElement.className = "js";
+    var supportsCssVars = function () {
+      var e, t = document.createElement("style");
+      t.innerHTML = "root: { --tmp-var: bold; }";
+      document.head.appendChild(t);
+      e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)"));
+      t.parentNode.removeChild(t);
+      return e;
+    };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+  </script>
+
+  <!-- Shaders -->
+  <script type="x-shader/x-vertex" id="wrapVertexShader">
+    attribute float size;
+    attribute vec3 color;
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      gl_PointSize = size * ( 350.0 / - mvPosition.z );
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="wrapFragmentShader">
+    varying vec3 vColor;
+    uniform sampler2D texture;
+    void main(){
+      vec4 textureColor = texture2D( texture, gl_PointCoord );
+      if ( textureColor.a < 0.3 ) discard;
+      vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
+      gl_FragColor = color;
+    }
+  </script>
+
+  <script src="js/hero-carousel.js" defer></script>
 </head>
 
 <body>
-  
-  <nav>
-    <a href="#" class="logo">Nathan Senechal</a>
-    <div class="links-container">
-      <a href="#">Compétences</a>
-      <a href="#">Projets</a>
-      <a href="#">Me contacter</a>
-      <a href="#">Mon CV</a>
+
+  <div id="bg-slot"></div>
+  <script src="js/include/include-background.js"></script>
+
+  <!-- Navbar -->
+  <div id="navbar-slot"></div>
+  <script src="js/include/include-navbar.js" defer></script>
+
+  <!-- INTRO -->
+  <section class="hero hero-intro">
+    <div class="hero-intro__container">
+
+      <div class="hero-intro__photo">
+        <img src="img/nathan.png" alt="Nathan Senechal - Business Intelligence & Data" />
+      </div>
+
+      <div class="hero-intro__content">
+        <div class="hero-intro__tag">
+          BUSINESS INTELLIGENCE · AUTOMATISATION · DATA ENGINEERING
+        </div>
+
+        <h1 class="hero-intro__title">
+          Structurer les données.<br>
+          Optimiser les processus.<br>
+          Éclairer les décisions.
+        </h1>
+
+        <p class="hero-intro__desc">
+          J’accompagne les organisations dans la structuration de leurs données et l’automatisation de leurs flux métiers.
+          De la modélisation des bases à la création d’indicateurs décisionnels, je conçois des solutions fiables, évolutives et orientées performance.
+          <br>
+          J’interviens sur l’ensemble de la chaîne de valeur data : collecte, transformation, gouvernance et restitution, avec une approche pragmatique centrée sur l’impact métier et l’aide à la décision.
+          <br>
+          Mon objectif est de transformer la donnée en un véritable levier stratégique, en construisant des systèmes robustes qui optimisent les processus, fiabilisent les analyses et soutiennent des décisions éclairées.
+        </p>
+
+        <div class="hero-intro__cta">
+          <a href="#projectsCarousel" class="btn-primary">Voir mes projets</a>
+          <a href="contact.html" class="btn-secondary">Me contacter</a>
+        </div>
+      </div>
+
     </div>
-    <svg class="burger" xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#e3e3e3"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
-  </nav>
-  
-  <div class="fullscreen-menu">
-    <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>    <a href="#">Compétences</a>
-    <a href="#">Projets</a>
-    <a href="#">Me contacter</a>
-    <a href="#">Mon CV</a>
-  </div>
-  
-  <div class="hero">
-    <canvas class="scene scene--full" id="scene"></canvas>
-    <script type="x-shader/x-vertex" id="wrapVertexShader">
-      attribute float size;
-      attribute vec3 color;
-      varying vec3 vColor;
-      void main() {
-        vColor = color;
-        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-        gl_PointSize = size * ( 350.0 / - mvPosition.z );
-        gl_Position = projectionMatrix * mvPosition;
-      }
-    </script>
-    <script type="x-shader/x-fragment" id="wrapFragmentShader">
-      varying vec3 vColor;
-      uniform sampler2D texture;
-      void main(){
-        vec4 textureColor = texture2D( texture, gl_PointCoord );
-        if ( textureColor.a < 0.3 ) discard;
-        vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
-        gl_FragColor = color;
-      }
-    </script>
-    
-    <div class="hero-content">
-      <h1>PORTFOLIO</h1>
+  </section>
+
+  <section class="hero-carousel">
+
+    <div class="carousel-section-header">
+
+      <h2 class="carousel-section-title">Projets récents</h2>
+
+      <p class="carousel-section-desc">
+        Quelques réalisations illustrant mon approche en Business Intelligence,
+        automatisation de processus et conception de systèmes data.
+      </p>
     </div>
-    
-  </div>
-  
-  <script src="js/demo.js"></script>
-  <script src="js/three.min.js"></script>
-  <script src="js/TweenMax.min.js"></script>
-  <script src="js/demo1.js"></script>
-  
+
+    <div class="carousel" id="projectsCarousel" aria-label="Projets en vedette">
+
+      <button class="carousel__nav carousel__nav--prev" aria-label="Projet précédent">
+        <span aria-hidden="true">←</span>
+      </button>
+
+      <div class="carousel__viewport">
+        <div class="carousel__track">
+
+          <!-- Slide 1 -->
+          <article class="slide is-active" data-theme="pv">
+            <div class="slide__grid">
+              <div class="slide__meta">
+                <div class="slide__tag">BI & REPORTING</div>
+                <h2 class="slide__title">Rapport d'activité automatique</h2>
+                <p class="slide__desc">
+                  Réalisation d’un portail de suivi d’activité : extraction de données, calcul de métriques, indicateurs clés, tableaux de bord interactifs.
+                </p>
+                <a class="slide__cta" href="projets.html#pv">Découvrir le projet</a>
+              </div>
+
+              <div class="slide__media">
+                <div class="media__frame">
+                  <img src="img/projects/rapport-act/minia.png" alt="Aperçu du projet Rapport d'activité automatique">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 2 -->
+          <article class="slide" data-theme="dtaf">
+            <div class="slide__grid">
+              <div class="slide__meta">
+                <div class="slide__tag">AUTOMATISATION</div>
+                <h2 class="slide__title">Dossier de projets automatisés</h2>
+                <p class="slide__desc">
+                  Automatisation et fiabilisation d’un dossier administratif : génération de documents, contrôles, consolidation, réduction des erreurs.
+                </p>
+                <a class="slide__cta" href="projets.html#dtaf">Découvrir le projet</a>
+              </div>
+
+              <div class="slide__media">
+                <div class="media__frame">
+                  <img src="img/projects/dtaf/minia.png" alt="Aperçu du projet Dossier administratifs automatisés">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 3 -->
+          <article class="slide" data-theme="bi">
+            <div class="slide__grid">
+              <div class="slide__meta">
+                <div class="slide__tag">PILOTAGE ÉNERGÉTIQUE</div>
+                <h2 class="slide__title">Gestion énergétique multi-site</h2>
+                <p class="slide__desc">
+                  Tableau de bord de suivi de la consommation énergétique : relevés simplifiés, indicateurs clés, alertes personnalisées.
+                </p>
+                <a class="slide__cta" href="projets.html#bi">Découvrir le projet</a>
+              </div>
+
+              <div class="slide__media">
+                <div class="media__frame">
+                  <img src="img/projects/belha/minia.png" alt="Aperçu du projet Gestion énergétique">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 4 -->
+          <article class="slide" data-theme="reporting">
+            <div class="slide__grid">
+              <div class="slide__meta">
+                <div class="slide__tag">POWER PLATFORM</div>
+                <h2 class="slide__title">Portail documentaire sécurisé</h2>
+                <p class="slide__desc">
+                  Portail de gestion documentaire : centralisation, dépôts/validation sécurisés, accès simplifiés, suivi des versions.
+                </p>
+                <a class="slide__cta" href="projets.html#reporting">Découvrir le projet</a>
+              </div>
+
+              <div class="slide__media">
+                <div class="media__frame">
+                  <img src="img/projects/docs/minia.png" alt="Aperçu du projet Portail documentaire">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 5 -->
+          <article class="slide" data-theme="transformation">
+            <div class="slide__grid">
+              <div class="slide__meta">
+                <div class="slide__tag">DATA MODELING</div>
+                <h2 class="slide__title">Création de bases de données</h2>
+                <p class="slide__desc">
+                  Création de bases de données SQL / NoSQL : structuration, normalisation, optimisation des requêtes, insertion de données.
+                </p>
+                <a class="slide__cta" href="projets.html#bdd">Découvrir le projet</a>
+              </div>
+
+              <div class="slide__media">
+                <div class="media__frame">
+                  <img src="img/projects/bdd/minia.png" alt="Aperçu du projet Création de bases de données">
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <button class="carousel__nav carousel__nav--next" aria-label="Projet suivant">
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <div class="carousel__dots" role="tablist" aria-label="Choisir un projet">
+        <button class="dot is-active" aria-label="Aller au projet 1"></button>
+        <button class="dot" aria-label="Aller au projet 2"></button>
+        <button class="dot" aria-label="Aller au projet 3"></button>
+        <button class="dot" aria-label="Aller au projet 4"></button>
+        <button class="dot" aria-label="Aller au projet 5"></button>
+      </div>
+
+    </div>
+  </section>
+
 </body>
+</html>

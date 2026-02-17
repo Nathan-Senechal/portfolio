@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos — Nathan Senechal</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    document.documentElement.className = "js";
+    var supportsCssVars = function () {
+      var e, t = document.createElement("style");
+      t.innerHTML = "root: { --tmp-var: bold; }";
+      document.head.appendChild(t);
+      e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)"));
+      t.parentNode.removeChild(t);
+      return e;
+    };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+  </script>
+
+  <!-- Shaders (background) -->
+  <script type="x-shader/x-vertex" id="wrapVertexShader">
+    attribute float size;
+    attribute vec3 color;
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      gl_PointSize = size * ( 350.0 / - mvPosition.z );
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="wrapFragmentShader">
+    varying vec3 vColor;
+    uniform sampler2D texture;
+    void main(){
+      vec4 textureColor = texture2D( texture, gl_PointCoord );
+      if ( textureColor.a < 0.3 ) discard;
+      vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
+      gl_FragColor = color;
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div id="bg-slot"></div>
+  <script src="./js/include/include-background.js"></script>
+
+  <!-- Navbar -->
+  <div id="navbar-slot"></div>
+  <script src="./js/include/include-navbar.js" defer></script>
+
+  <main class="about">
+
+    <!-- HERO -->
+    <header class="about-hero">
+      <div class="about__container">
+
+        <div class="about-hero__grid">
+          <div class="about-hero__media">
+            <img src="img/nathan.png" alt="Nathan Senechal">
+          </div>
+
+          <div class="about-hero__content">
+
+            <div class="about-hero__tag">À PROPOS · PROFIL · PARCOURS</div>
+
+            <div class="about-hero__top">
+              <h1 class="about-hero__title">Nathan Senechal</h1>
+              <p class="about-hero__subtitle">Business Intelligence · Automatisation · Data Engineering</p>
+            </div>
+
+            <div class="about-hero__text">
+              <p class="about-hero__desc">
+                Je conçois des solutions data qui rendent l’information exploitable, fiable et directement utile à la décision.
+                Mon travail consiste à structurer des données souvent dispersées, automatiser des processus métiers et transformer des flux complexes
+                en outils de pilotage clairs et performants.
+              </p>
+
+              <p class="about-hero__desc">
+                J’interviens avec une approche pragmatique : comprendre le contexte, fiabiliser les fondations, puis produire des indicateurs réellement actionnables.
+              </p>
+
+              <div class="about-hero__do">
+                <div class="about-hero__doTitle">Concrètement, j’interviens sur :</div>
+                <ul class="about-hero__list">
+                  <li>Structuration & modélisation de données orientées performance</li>
+                  <li>Automatisation de processus et consolidation d’informations</li>
+                  <li>Indicateurs décisionnels intégrés aux outils existants</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="about-hero__bottom">
+              <div class="about-hero__cta">
+                <a class="btn-primary" href="contact.html">Me contacter</a>
+                <a class="btn-secondary" href="">Télécharger mon CV</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- STATS -->
+    <section class="about-stats" aria-label="Chiffres clés">
+    <div class="about__container">
+        <div class="about-stats__grid">
+
+        <article class="stat-card">
+            <div class="stat-card__value">+10</div>
+            <div class="stat-card__label">Projets data & automatisation</div>
+            <div class="stat-card__hint">Scolaire + entreprise</div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-card__value">-40%</div>
+            <div class="stat-card__label">Temps de traitement</div>
+            <div class="stat-card__hint">Sur des workflows ciblés</div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-card__value">5+</div>
+            <div class="stat-card__label">Outils intégrés</div>
+            <div class="stat-card__hint">Excel, Power Query, SQL, APIs, Power Platform</div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-card__value">E2E</div>
+            <div class="stat-card__label">Chaîne data complète</div>
+            <div class="stat-card__hint">Collecte → Modèle → KPI → Restitution</div>
+        </article>
+
+        </div>
+    </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <section class="about-separator" aria-hidden="true"></section>
+
+    <!-- PARCOURS -->
+    <section class="about-timeline" aria-label="Parcours">
+    <div class="about__container">
+
+        <header class="about-section-header">
+        <div class="about-section-tag">PARCOURS</div>
+        <h2 class="about-section-title">Une progression orientée data & impact opérationnel.</h2>
+        <p class="about-section-desc">
+            Formation, alternance et projets : chaque étape renforce ma capacité à structurer, automatiser et piloter.
+        </p>
+        </header>
+
+        <ol class="timeline">
+
+        <li class="timeline__item">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+            <div class="timeline__top">
+                <div class="timeline__title">BUT Science des données</div>
+                <div class="timeline__date">2023 — 2026</div>
+            </div>
+            <p class="timeline__desc">
+                Statistiques, modélisation, data management, visualisation, projets data appliqués.
+            </p>
+            <div class="timeline__tags" aria-label="Compétences associées">
+                <span class="pill">Python</span>
+                <span class="pill">SQL</span>
+                <span class="pill">Stats</span>
+                <span class="pill">Dataviz</span>
+            </div>
+            </div>
+        </li>
+
+        <li class="timeline__item">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+            <div class="timeline__top">
+                <div class="timeline__title">Alternance — Data & automatisation (groupe Circet)</div>
+                <div class="timeline__date">2025 — 2026</div>
+            </div>
+            <p class="timeline__desc">
+                Automatisation de workflows, consolidation de données multi-sources, mise en place d’outils de pilotage.
+            </p>
+            <div class="timeline__tags" aria-label="Compétences associées">
+                <span class="pill">VBA</span>
+                <span class="pill">Power Query</span>
+                <span class="pill">Power Automate</span>
+                <span class="pill">API</span>
+            </div>
+            </div>
+        </li>
+
+        <li class="timeline__item">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+            <div class="timeline__top">
+                <div class="timeline__title">Projets BI & pilotage énergétique multi-site</div>
+                <div class="timeline__date">2024 — 2025</div>
+            </div>
+            <p class="timeline__desc">
+                Construction d’un suivi conso/coût, indicateurs et alertes, structuration de la donnée pour le décisionnel.
+            </p>
+            <div class="timeline__tags" aria-label="Compétences associées">
+                <span class="pill">KPI</span>
+                <span class="pill">Modélisation</span>
+                <span class="pill">Reporting</span>
+            </div>
+            </div>
+        </li>
+
+        <li class="timeline__item">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+            <div class="timeline__top">
+                <div class="timeline__title">Base de données — conception & optimisation</div>
+                <div class="timeline__date">2024</div>
+            </div>
+            <p class="timeline__desc">
+                Modélisation relationnelle, normalisation, requêtes optimisées, structuration orientée usage métier.
+            </p>
+            <div class="timeline__tags" aria-label="Compétences associées">
+                <span class="pill">MySQL</span>
+                <span class="pill">Oracle</span>
+                <span class="pill">Modèle</span>
+            </div>
+            </div>
+        </li>
+
+        </ol>
+
+    </div>
+    </section>
+
+    <!-- CTA FIXE (apparaît après le hero) -->
+    <div class="floating-cta" id="floatingCta" aria-hidden="true">
+    <div class="floating-cta__inner">
+        <div class="floating-cta__text">
+        <div class="floating-cta__title">Discutons de votre besoin.</div>
+        <div class="floating-cta__desc">BI, automatisation, reporting, structuration data : je peux t’aider à aller plus vite et plus fiable.</div>
+        </div>
+        <a class="btn-primary floating-cta__btn" href="contact.html">Me contacter</a>
+    </div>
+    </div>
+
+    <section class="about-separator" aria-hidden="true"></section>
+    
+    <section class="about-method" aria-label="Méthode de travail">
+    <div class="about__container">
+
+        <header class="about-section-header">
+        <div class="about-section-tag">MÉTHODE</div>
+        <h2 class="about-section-title">Une démarche structurée, orientée résultat et adoption.</h2>
+        <p class="about-section-desc">
+            De l’analyse du besoin à la mise en usage, je conçois des solutions data robustes, compréhensibles et réellement utilisées.
+        </p>
+        </header>
+
+        <div class="process" role="list" aria-label="Étapes de la méthode">
+        <article class="process__step" role="listitem">
+            <div class="process__index">01</div>
+            <div class="process__content">
+            <div class="process__title">Cadrage</div>
+            <div class="process__desc">Objectif, périmètre, KPI, contraintes, parties prenantes.</div>
+            </div>
+        </article>
+
+        <article class="process__step" role="listitem">
+            <div class="process__index">02</div>
+            <div class="process__content">
+            <div class="process__title">Structuration</div>
+            <div class="process__desc">Modèle, règles de qualité, consolidation multi-sources.</div>
+            </div>
+        </article>
+
+        <article class="process__step" role="listitem">
+            <div class="process__index">03</div>
+            <div class="process__content">
+            <div class="process__title">Automatisation</div>
+            <div class="process__desc">Workflows, contrôles, fiabilisation, industrialisation.</div>
+            </div>
+        </article>
+
+        <article class="process__step" role="listitem">
+            <div class="process__index">04</div>
+            <div class="process__content">
+            <div class="process__title">Restitution</div>
+            <div class="process__desc">Dashboards/rapports, lisibilité, lecture immédiate.</div>
+            </div>
+        </article>
+
+        <article class="process__step" role="listitem">
+            <div class="process__index">05</div>
+            <div class="process__content">
+            <div class="process__title">Communication & adoption</div>
+            <div class="process__desc">Présentation, formation, documentation, autonomie équipes.</div>
+            </div>
+        </article>
+        </div>
+
+        <div class="method-notes" aria-label="Détails de la méthode">
+        <div class="method-notes__grid">
+            <div class="method-notes__block">
+            <div class="method-notes__title">Livrables attendus</div>
+            <p class="method-notes__text">
+                KPI définis, sources & règles de calcul, modèle de données, workflow automatisé, tableaux de bord,
+                documentation et guide de prise en main.
+            </p>
+            </div>
+
+            <div class="method-notes__block">
+            <div class="method-notes__title">Ce que je garantis</div>
+            <p class="method-notes__text">
+                Robustesse (contrôles), clarté (indicateurs compréhensibles), et adoption (formation + passation).
+                Le but : un outil réellement utilisé, pas un prototype “vitrine”.
+            </p>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
