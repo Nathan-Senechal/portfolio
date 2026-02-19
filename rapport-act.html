@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rapport d'activité automatique — Nathan Senechal</title>
 
-  <!-- ✅ IMPORTANT : force la base des chemins au dossier racine -->
-  <base href="../">
-
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/script.js" defer></script>
 
@@ -62,6 +59,247 @@
   <!-- Navbar -->
   <div id="navbar-slot"></div>
   <script src="js/include/include-navbar.js" defer></script>
+
+ <main class="project">
+
+    <!-- HERO -->
+    <section class="project-hero">
+      <div class="project__container project-hero__grid">
+
+        <div class="project-hero__content">
+          <div class="project-hero__top">
+            <p class="project-hero__tag">AUTOMATISATION · REPORTING</p>
+            <h1 class="project-hero__title">Rapport d’activité automatique</h1>
+          </div>
+
+          <p class="project-hero__desc">
+            Conception et déploiement d’un pipeline de reporting automatisé permettant de produire,
+            à partir d’un ERP différent de celui du groupe, un export mensuel .xlsx conforme aux standards corporate.
+            La solution consolide 12 tables via API, structure et normalise les données,
+            intègre des calculs métier avancés (marges brutes, neutralisation du stock, reste à facturer, production...),
+            et génère un dashboard Excel fiable, reproductible et prêt à être transmis.
+
+          </p>
+
+          <div class="project-hero__bottom">
+            <div class="project-hero__pills">
+              <span class="pill">Excel</span>
+              <span class="pill">Power Query</span>
+              <span class="pill">VBA</span>
+              <span class="pill">API ERP</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-hero__media">
+          <img class="project-hero__img"
+              src="img/projects/rapport-act/minia.png"
+              alt="Aperçu du dashboard Rapport d’activité" />
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- RÉSUMÉ EXPRESS -->
+    <section class="project-section">
+      <div class="project__container">
+
+        <h2 class="project__h2">Résumé express</h2>
+
+        <div class="project-grid-4">
+          <div class="project-card">
+            <h3>Objectif</h3>
+            <p>
+              Produire un export strictement conforme aux exigences du groupe,
+              malgré un ERP différent.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Données</h3>
+            <p>
+              Extraction via API et consolidation de 12 tables ERP.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Traitements</h3>
+            <p>
+              Jointures, normalisation et calculs métier
+              (marges brutes, neutralisation du stock).
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Impact</h3>
+            <p>
+              ~2h gagnées par export, moins d’erreurs,
+              meilleure visualisation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- PROBLÈME / CONTRAINTES -->
+<section class="project-section project-problem">
+  <div class="project__container">
+
+    <h2 class="project__h2">Problème & contraintes</h2>
+
+    <div class="project-problem__rail">
+
+      <div class="project-problem__block">
+        <h3 class="project-problem__title">Problème</h3>
+        <p class="project-problem__text">
+          Suite au rachat de l’agence par Circet, le directeur devait transmettre un reporting
+          mensuel au format .xlsx strictement conforme aux standards du groupe.
+        </p>
+        <p class="project-problem__text">
+          Or, l’agence utilisait un ERP différent, ne permettant ni export direct compatible,
+          ni calcul automatique des indicateurs exigés (marges brutes, neutralisation du stock).
+        </p>
+        <p class="project-problem__text">
+          Le processus manuel existant était long (~2h par export), sujet à erreurs et difficile à reproduire.
+        </p>
+      </div>
+
+      <div class="project-problem__block">
+        <h3 class="project-problem__title">Contraintes</h3>
+        <ul class="project-problem__list">
+          <li>Consolidation automatique de 12 tables ERP</li>
+          <li>Actualisation automatique des données</li>
+          <li>Fiabilité et reproductibilité du reporting</li>
+          <li>Suppression des manipulations manuelles</li>
+          <li>Lisibilité pour la direction</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+    <!-- SOLUTION -->
+    <section class="project-section">
+      <div class="project__container">
+
+        <h2 class="project__h2">Solution</h2>
+
+        <div class="project-card">
+          <p>
+            Mise en place d’un pipeline automatisé :
+          </p>
+
+          <p>
+            <strong>API ERP (12 tables)</strong> →
+            <strong>Power Query (consolidation, jointures, typages)</strong> →
+            <strong>Calculs métier</strong> →
+            <strong>Dashboard Excel</strong> →
+            <strong>Export automatisé .xlsx via VBA</strong>
+          </p>
+
+          <p>
+            L’utilisateur déclenche simplement l’actualisation puis l’export final.
+            Le fichier généré respecte la structure attendue par le groupe.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- DÉTAILS TECHNIQUES -->
+    <section class="project-section project-section--tech">
+      <div class="project__container">
+
+        <h2 class="project__h2">Détails techniques</h2>
+
+        <div class="project-grid-2">
+
+          <div class="project-card">
+            <h3>Connexion API</h3>
+            <p>
+              Appels aux endpoints nécessaires pour récupérer les données
+              couvrant les 12 tables requises.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Modélisation Power Query</h3>
+            <p>
+              Jointures, normalisation des types, colonnes dérivées
+              et structuration pour le reporting.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Calculs métier</h3>
+            <p>
+              Implémentation des indicateurs exigés par le groupe :
+              marges brutes, neutralisation du stock, etc.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Export VBA</h3>
+            <p>
+              Génération d’un fichier .xlsx propre,
+              structuré et prêt à être transmis.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- GALERIE -->
+    <section class="project-section">
+      <div class="project__container">
+
+        <h2 class="project__h2">Galerie</h2>
+
+        <div class="project-gallery">
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt2.png" alt="Dashboard — Vue globale">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt4.png" alt="Dashboard — Focus commandes">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt1.png" alt="Modèle Power Query — dépendances">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt3.png" alt="Données — table Tiers">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt6.png" alt="Export — écran export">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt5.png" alt="VBA — macro d’export">
+          </div>
+
+          <div class="project-gallery__item">
+            <img src="img/projects/rapport-act/capt7.png" alt="Power Query — code M">
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+  </main>
 
 </body>
 </html>

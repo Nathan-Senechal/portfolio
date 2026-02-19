@@ -2163,37 +2163,6 @@ body{
   color: rgba(15,23,42,0.72);
 }
 
-/* Method grid */
-.method-grid{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 18px;
-  margin-top: 16px;
-}
-
-.method-card{
-  grid-column: span 6;
-  border-radius: 22px;
-  padding: 18px;
-
-  background: rgba(255,255,255,0.70);
-  border: 1px solid rgba(15,23,42,0.12);
-  box-shadow: 0 18px 60px rgba(15,23,42,0.10);
-}
-
-.method-card__title{
-  font-size: 15px;
-  font-weight: 900;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-.method-card__desc{
-  font-size: 14px;
-  line-height: 1.75;
-  color: rgba(15,23,42,0.72);
-}
-
 /* CTA final */
 .skills-cta{
   padding: 46px 0 0;
@@ -2246,3 +2215,314 @@ body{
 }
 
 /* #endregion ==================SKILLS================= */
+
+/* ================= PROJECT PAGE (aligned with site) ================= */
+
+.project{
+  position: relative;
+  z-index: 2;
+  padding: 12px 0 120px; /* même logique que about/contact/skills/projects */
+}
+
+.project__container{
+  width: min(1560px, 96vw);
+  margin: 0 auto;
+}
+
+/* HERO (même rythme que les autres pages) */
+.project-hero{
+  padding: 105px 0 40px;
+}
+
+.project-hero__grid{
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(18px, 3vw, 42px);   /* cohérent hero-intro/about */
+  align-items: stretch;          /* texte = hauteur image */
+}
+
+/* Colonne texte : top / middle / bottom */
+.project-hero__content{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-hero__tag{
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 650;
+  color: rgba(15,23,42,0.55);
+  margin-bottom: 18px;
+}
+
+.project-hero__title{
+  font-size: clamp(34px, 3.6vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.project-hero__desc{
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(15,23,42,0.72);
+  max-width: 90ch;
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+/* Pills en bas (sans créer un nouveau style de pill) */
+.project-hero__bottom{
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15,23,42,0.10); /* comme about-hero__do */
+}
+
+.project-hero__pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* utilise ton style existant .chip (cohérence) */
+.project-hero__pills .chip{
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.project-hero__pills .chip:hover{
+  transform: none;
+  box-shadow: none;
+}
+
+/* Colonne image (PNG sans fond) */
+.project-hero__media{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-hero__img{
+  width: min(500px, 36vw); /* cohérent avec about-hero__media max */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 26px 80px rgba(15,23,42,0.14)); /* même vibe que hero-intro img shadow */
+}
+
+/* Sections */
+.project-section{
+  padding: 46px 0 0; /* même cadence que skills-section */
+}
+
+.project__h2{
+  font-size: clamp(26px, 2.4vw, 38px); /* same as about/skills section title */
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 18px;
+}
+
+/* Grilles */
+.project-grid-4{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.project-grid-2{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+/* Cards (réutilise le glass style) */
+.project-card{
+  border-radius: 22px;
+  padding: 18px;
+
+  background: rgba(255,255,255,0.70);
+  border: 1px solid rgba(15,23,42,0.12);
+  box-shadow: 0 18px 60px rgba(15,23,42,0.10);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* placements grid */
+.project-grid-4 .project-card{ grid-column: span 3; }
+.project-grid-2 .project-card{ grid-column: span 6; }
+
+.project-card h3{
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.project-card p,
+.project-card li{
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(15,23,42,0.72);
+}
+
+.project-card ul{
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+/* Galerie (vignettes uniformes, crop top-left) */
+.project-gallery{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+}
+
+.project-gallery__item{
+  grid-column: span 4;
+
+  position: relative;
+  aspect-ratio: 16 / 10;         /* format uniforme */
+  border-radius: 0px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.60);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 16px 50px rgba(15,23,42,0.08);
+
+  transition: transform 180ms ease, box-shadow 180ms ease, border 180ms ease;
+}
+
+.project-gallery__item:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 26px 80px rgba(56, 112, 243, 0.18);
+  border: 1px solid #494cf3;
+}
+
+.project-gallery__item img{
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  object-fit: cover;             /* remplit le cadre */
+  object-position: top left;     /* origine haut gauche */
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1100px){
+  .project-gallery__item{ grid-column: span 6; }
+}
+
+@media (max-width: 720px){
+  .project-gallery__item{ grid-column: span 12; }
+}
+
+/* ================= PROBLEM SECTION (vertical rail) ================= */
+
+.project-problem__rail{
+  position: relative;
+  padding-left: 40px;
+  display: grid;
+  gap: 36px;
+}
+
+/* Rail vertical */
+.project-problem__rail::before{
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(15,23,42,0.12);
+  border-radius: 999px;
+}
+
+/* Blocks */
+.project-problem__block{
+  position: relative;
+}
+
+/* Petit point sur le rail */
+.project-problem__block::before{
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.85);
+  box-shadow: 0 10px 30px rgba(15,23,42,0.16);
+}
+
+/* Titles */
+.project-problem__title{
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+/* Text */
+.project-problem__text{
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(15,23,42,0.72);
+  margin-bottom: 12px;
+}
+
+/* List */
+.project-problem__list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.project-problem__list li{
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(15,23,42,0.72);
+}
+
+.project-problem__list li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.6);
+}
+
+/* Responsive */
+@media (max-width: 720px){
+  .project-problem__rail{
+    padding-left: 28px;
+    gap: 26px;
+  }
+
+  .project-problem__rail::before{
+    left: 8px;
+  }
+
+  .project-problem__block::before{
+    left: -20px;
+  }
+}
